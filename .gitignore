@@ -2,3 +2,4 @@
 bot_schedule.session
 venv/
 TOKEN
+__pycache__/
