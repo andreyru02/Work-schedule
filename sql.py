@@ -1,4 +1,5 @@
 import sqlite3
+from prettytable import PrettyTable
 
 
 class SQL:
@@ -37,7 +38,12 @@ class SQL:
     def read_bd(self):
         """Вывод информации с БД в чат"""
         with self.connection:
-            return self.cursor.execute('SELECT * FROM "subscriptions"').fetchall()
+            data = self.cursor.execute('SELECT * FROM "subscriptions"').fetchall()
+            table = PrettyTable()
+            for item in data:
+                table.field_names = ['ID', 'Name', 'Username', 'Graph', 'List', 'Date']
+                table.add_row([item[0], item[1], item[2], item[3], item[4], item[5]])
+            return f'```{table}```'
 
     def close(self):
         """Закрываем соединение с БД"""

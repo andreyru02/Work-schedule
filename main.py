@@ -4,9 +4,10 @@ from aiogram.utils import executor
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.types import InputFile
 import glob
+import config
 from sql import SQL
 
-bot = Bot(token="TOKEN")
+bot = Bot(token=config.TOKEN)
 dp = Dispatcher(bot)
 db = SQL('bd.db')
 
@@ -60,7 +61,7 @@ async def menu(call: types.CallbackQuery):
                                    reply_markup=keyboard)
             db.add_count_date_file(call.from_user.id)
     elif call.data == 'send_bd' and call.from_user.id == 860916279:
-        await bot.send_message(call.from_user.id, db.read_bd())
+        await bot.send_message(call.from_user.id, db.read_bd(), parse_mode='Markdown')
     else:
         await bot.send_message(call.from_user.id, 'Неизвестная команда!', reply_markup=keyboard)
 

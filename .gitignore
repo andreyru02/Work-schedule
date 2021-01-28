@@ -3,3 +3,4 @@ bot_schedule.session
 venv/
 TOKEN
 __pycache__/
+bd.db
